@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Filters.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PNMClass.cpp" />
     <ClCompile Include="PrintLine.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Filters.h" />
     <ClInclude Include="NormalV.h" />
     <ClInclude Include="PNMClass.h" />
     <ClInclude Include="PrintLine.h" />
