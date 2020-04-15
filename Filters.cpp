@@ -286,3 +286,14 @@ int Filter::Random(const string& filename)
 	}
 	return 0;
 }
+
+void Filter::Gradient()
+{
+	for (int i = 0; i < getHeight(); i++)
+	{
+		for (int j = 0; j < getWidth(); j++)
+		{
+			gspixelsM[i][j] = ((double)j / width) * 255.0;
+		}
+	}
+}

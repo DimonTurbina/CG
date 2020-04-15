@@ -11,6 +11,7 @@ public:
 	int Ordered8x8(const string& filename, int bits);
 	int HalfTone4x4(const string& filename, int bits);
 	int Random(const string& filename);
+	void Gradient();
 private:
 	vector<vector<int>> errorBufferArray;
 	const double orderedMatrix[8][8] = {
