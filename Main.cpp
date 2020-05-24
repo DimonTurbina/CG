@@ -2,8 +2,9 @@
 #include "PNMClass.h"
 #include "PrintLine.h"
 #include "Filters.h"
+#include "ColorSpaces.h"
 
-enum {
+enum class PNMTransform {
 	Rotate_left,
 	Rotate_right,
 	Mirror_x,
@@ -29,23 +30,23 @@ int main(int argc, char* argv[]) {
 			check.open(argv[2]);
 			switch (atoi(argv[4]))
 			{
-			case(1):
+			case(static_cast<int>(PNMTransform::Rotate_left)):
 				check.inputRotatedLeft(argv[3]);
 				break;
 
-			case(2):
+			case(static_cast<int>(PNMTransform::Rotate_right)):
 				check.inputRotatedRight(argv[3]);
 				break;
 
-			case(3):
+			case(static_cast<int>(PNMTransform::Mirror_x)):
 				check.inputMirrorX(argv[3]);
 				break;
 
-			case(4):
+			case(static_cast<int>(PNMTransform::Mirror_y)):
 				check.inputMirrorY(argv[3]);
 				break;
 
-			case(5):
+			case(static_cast<int>(PNMTransform::Inverse_colors)):
 				check.inputWithInverColors(argv[3]);
 				break;
 			default:
@@ -70,39 +71,93 @@ int main(int argc, char* argv[]) {
 			switch (atoi(argv[4]))
 			{
 			case(1):
-				Ftest.FloydSteinberg(argv[4]);
+				Ftest.FloydSteinberg(argv[5]);
 				break;
 			case(2):
-				Ftest.JJN(argv[4]);
+				Ftest.JJN(argv[5]);
 				break;
 			case(3):
-				Ftest.Siera(argv[4]);
+				Ftest.Siera(argv[5]);
 				break;
 			case(4):
-				Ftest.Atkinson(argv[4]);
+				Ftest.Atkinson(argv[5]);
 				break;
 			case(5):
 				if (atoi(argv[3]) == 1)
 					Ftest.Gradient();
-				Ftest.Ordered8x8(argv[4], atoi(argv[5]));
+				Ftest.Ordered8x8(argv[5], atoi(argv[6]));
 				break;
 			case(6):
 				if (atoi(argv[3]) == 1)
 					Ftest.Gradient();
-				Ftest.HalfTone4x4(argv[4], atoi(argv[5]));
+				Ftest.HalfTone4x4(argv[5], atoi(argv[6]));
 				break;
 			case(7):
-				Ftest.Random(argv[4]);
+				Ftest.Random(argv[5]);
 				break;
 			default:
 				cout << "Wrong command";
 				break;
 			}
 		}
+		case(4): {
+			ColorSpace in;
+			ColorSpace out;
+			if (argv[2] == "RGB")
+				in = ColorSpace::RGB;
+			if (argv[2] == "HSL")
+				in = ColorSpace::HSL;
+			if (argv[2] == "HSV")
+				in = ColorSpace::HSV;
+			if (argv[2] == "YCbCr.601")
+				in = ColorSpace::YCbCr_601;
+			if (argv[2] == "YCbCr.709")
+				in = ColorSpace::YCbCr_709;
+			if (argv[2] == "YCoCg")
+				in = ColorSpace::YCoCg;
+			if (argv[2] == "CMY")
+				in = ColorSpace::CMY;
+			if (argv[3] == "RGB")
+				out = ColorSpace::RGB;
+			if (argv[3] == "HSL")
+				out = ColorSpace::HSL;
+			if (argv[3] == "HSV")
+				out = ColorSpace::HSV;
+			if (argv[3] == "YCbCr.601")
+				out = ColorSpace::YCbCr_601;
+			if (argv[3] == "YCbCr.709")
+				out = ColorSpace::YCbCr_709;
+			if (argv[3] == "YCoCg")
+				out = ColorSpace::YCoCg;
+			if (argv[3] == "CMY")
+				out = ColorSpace::CMY;
+			if (atoi(argv[4]) == 1){ 
+				ColorSpaces Lab4;
+				Lab4.open(argv[5]);
+				Lab4.ConverToRGB();
+				Lab4.ConvertFormat();
+				Lab4.input(argv[6]);
+			}
+			if (atoi(argv[4]) == 3) {
+				ColorSpaces Lab4;
+				Lab4.OpenMultipleFile(argv[5], argv[6], argv[7]);
+				Lab4.ConverToRGB();
+				Lab4.ConvertFormat();
+				Lab4.SaveMultipleFile(argv[5], argv[6], argv[7]);
+			}
+
+
+		}
 		default:
 			break;
 		}
 	}
+
+	/*ColorSpaces testSpace(ColorSpace::YCbCr_709, ColorSpace::RGB);
+	testSpace.open("C:\\Users\\dimon\\source\\repos\\CG\\Res\\Check1.pnm");
+	testSpace.ConverToRGB();
+	testSpace.ConvertFormat();
+	testSpace.input("C:\\Users\\dimon\\source\\repos\\CG\\Res\\Check10.pnm");*/
 	//PrintLine testLine;
 
 	//testLine.open("C:\\Users\\Dmitrii\\source\\repos\\Project6\\Project6\\imageout.pnm");
