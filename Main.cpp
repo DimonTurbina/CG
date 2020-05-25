@@ -132,14 +132,14 @@ int main(int argc, char* argv[]) {
 			if (argv[3] == "CMY")
 				out = ColorSpace::CMY;
 			if (atoi(argv[4]) == 1){ 
-				ColorSpaces Lab4;
+				ColorSpaces Lab4(in, out);
 				Lab4.open(argv[5]);
 				Lab4.ConverToRGB();
 				Lab4.ConvertFormat();
 				Lab4.input(argv[6]);
 			}
 			if (atoi(argv[4]) == 3) {
-				ColorSpaces Lab4;
+				ColorSpaces Lab4(in, out);
 				Lab4.OpenMultipleFile(argv[5], argv[6], argv[7]);
 				Lab4.ConverToRGB();
 				Lab4.ConvertFormat();
