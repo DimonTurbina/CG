@@ -3,7 +3,7 @@
 
 ColorSpaces::ColorSpaces(ColorSpace in, ColorSpace out)
 {
-	PNM::PNM();
+	PNM();
 	this->in = in;
 	this->out = out;
 }

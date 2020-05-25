@@ -103,34 +103,36 @@ int main(int argc, char* argv[]) {
 		case(4): {
 			ColorSpace in;
 			ColorSpace out;
-			if (argv[2] == "RGB")
+			if (strcmp(argv[2],"RGB") == 0)
 				in = ColorSpace::RGB;
-			if (argv[2] == "HSL")
+			if (strcmp(argv[2], "HSL") == 0)
 				in = ColorSpace::HSL;
-			if (argv[2] == "HSV")
+			if (strcmp(argv[2], "HSV") == 0)
 				in = ColorSpace::HSV;
-			if (argv[2] == "YCbCr.601")
+			if (strcmp(argv[2], "YCbCr601") == 0)
 				in = ColorSpace::YCbCr_601;
-			if (argv[2] == "YCbCr.709")
+			if (strcmp(argv[2], "YCbCr709") == 0)
 				in = ColorSpace::YCbCr_709;
-			if (argv[2] == "YCoCg")
+			if (strcmp(argv[2], "YCoCg") == 0)
 				in = ColorSpace::YCoCg;
-			if (argv[2] == "CMY")
+			if (strcmp(argv[2], "CMY") == 0)
 				in = ColorSpace::CMY;
-			if (argv[3] == "RGB")
+			if (strcmp(argv[3], "RGB") == 0)
 				out = ColorSpace::RGB;
-			if (argv[3] == "HSL")
+			if (strcmp(argv[3], "HSL") == 0)
 				out = ColorSpace::HSL;
-			if (argv[3] == "HSV")
+			if (strcmp(argv[3], "HSV") == 0)
 				out = ColorSpace::HSV;
-			if (argv[3] == "YCbCr.601")
+			if (strcmp(argv[3], "YCbCr601") == 0)
 				out = ColorSpace::YCbCr_601;
-			if (argv[3] == "YCbCr.709")
+			if (strcmp(argv[3], "YcbCr709") == 0)
 				out = ColorSpace::YCbCr_709;
-			if (argv[3] == "YCoCg")
+			if (strcmp(argv[3], "YCoCg") == 0)
 				out = ColorSpace::YCoCg;
-			if (argv[3] == "CMY")
+			if (strcmp(argv[3], "CMY") == 0)
 				out = ColorSpace::CMY;
+			cout << static_cast<int>(in) << endl;
+			cout << static_cast<int>(out) << endl;
 			if (atoi(argv[4]) == 1){ 
 				ColorSpaces Lab4(in, out);
 				Lab4.open(argv[5]);
