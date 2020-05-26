@@ -3,6 +3,7 @@
 #include "PrintLine.h"
 #include "Filters.h"
 #include "ColorSpaces.h"
+#include "Brightness.h"
 
 enum class PNMTransform {
 	Rotate_left,
@@ -10,6 +11,14 @@ enum class PNMTransform {
 	Mirror_x,
 	Mirror_y,
 	Inverse_colors
+};
+
+enum class Lab {
+	PictureTransform,
+	PrintLine,
+	Disering,
+	ColorSpaces,
+	AutoBrightness
 };
 
 int main(int argc, char* argv[]) {
@@ -125,7 +134,7 @@ int main(int argc, char* argv[]) {
 				out = ColorSpace::HSV;
 			if (strcmp(argv[3], "YCbCr601") == 0)
 				out = ColorSpace::YCbCr_601;
-			if (strcmp(argv[3], "YcbCr709") == 0)
+			if (strcmp(argv[3], "YÑbCr709") == 0)
 				out = ColorSpace::YCbCr_709;
 			if (strcmp(argv[3], "YCoCg") == 0)
 				out = ColorSpace::YCoCg;
@@ -149,6 +158,68 @@ int main(int argc, char* argv[]) {
 			}
 
 
+		}
+
+		case(5): {
+			Brightness TestBrightness;
+			TestBrightness.open(argv[2]);
+			switch (atoi(argv[4]))
+			{
+			case(static_cast<int>(Conversions::RGBConstValues)):
+			{
+				cout << "0" << endl;
+				TestBrightness.setColorSpace(ColorSpace::RGB);
+				double differance = static_cast<double>(atoi(argv[5]));
+				double multyply = static_cast<double>(atof(argv[6]));
+				TestBrightness.ChangeBrightness(differance, multyply);
+				TestBrightness.input(argv[3]);
+			}
+			break;
+			case(static_cast<int>(Conversions::YCbCrConstValues)):
+			{
+				cout << "1" << endl;
+				TestBrightness.setColorSpace(ColorSpace::YCbCr_601);
+				double differance = static_cast<double>(atoi(argv[5]));
+				double multyply = static_cast<double>(atof(argv[6]));
+				TestBrightness.ChangeBrightness(differance, multyply);
+				TestBrightness.input(argv[3]);
+			}
+			break;
+			case(static_cast<int>(Conversions::RGBAuto)):
+			{
+				cout << "2" << endl;
+				TestBrightness.setColorSpace(ColorSpace::RGB);
+				TestBrightness.AutoBrightness(false);
+				TestBrightness.input(argv[3]);
+			}
+			break;
+			case(static_cast<int>(Conversions::YCbCrAuto)):
+			{
+				cout << "3" << endl;
+				TestBrightness.setColorSpace(ColorSpace::YCbCr_601);
+				TestBrightness.AutoBrightness(false);
+				TestBrightness.input(argv[3]);
+			}
+			break;
+			case(static_cast<int>(Conversions::RGBAuto39)):
+			{
+				cout << "4" << endl;
+				TestBrightness.setColorSpace(ColorSpace::RGB);
+				TestBrightness.AutoBrightness(true);
+				TestBrightness.input(argv[3]);
+			}
+			break;
+			case(static_cast<int>(Conversions::YCbCrAuto39)):
+			{
+				cout << "5" << endl;
+				TestBrightness.setColorSpace(ColorSpace::YCbCr_601);
+				TestBrightness.AutoBrightness(true);
+				TestBrightness.input(argv[3]);
+			}
+			break;
+			default:
+				break;
+			}
 		}
 		default:
 			break;

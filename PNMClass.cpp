@@ -150,14 +150,29 @@ void PNM::input(const string& filename) {
 	ofstream pnmPic(filename, ios::binary);
 	pnmPic << getFormat() << endl << getWidth() << " " << getHeight() << endl << getRange() << endl;
 
-	for (int i = 0; i < getHeight(); i++)
+	if (getFormat() == "P6")
 	{
-		for (int j = 0; j < getWidth(); j++)
+		for (int i = 0; i < getHeight(); i++)
 		{
-			pnmPic.put(pixelsM[i][j].R);
-			pnmPic.put(pixelsM[i][j].G);
-			pnmPic.put(pixelsM[i][j].B);
+			for (int j = 0; j < getWidth(); j++)
+			{
+				pnmPic.put(pixelsM[i][j].R);
+				pnmPic.put(pixelsM[i][j].G);
+				pnmPic.put(pixelsM[i][j].B);
+			}
 		}
+		pnmPic.close();
+	}
+	else
+	{
+		for (int i = 0; i < getHeight(); i++)
+		{
+			for (int j = 0; j < getWidth(); j++)
+			{
+				pnmPic.put(gspixelsM[i][j]);
+			}
+		}
+		pnmPic.close();
 	}
 }
 

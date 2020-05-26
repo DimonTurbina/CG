@@ -20,7 +20,7 @@ public:
 	void OpenMultipleFile(string f1, string f2, string f3);
 	void SaveMultipleFile(string f1, string f2, string f3);
 	string filenameArrey[3];
-private:
+protected:
 	string colorFormatInput;
 	string colorFormatOutput;
 	ColorSpace in;

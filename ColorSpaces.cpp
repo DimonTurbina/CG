@@ -1,6 +1,10 @@
 #include "ColorSpaces.h"
 #include <algorithm>
 
+ColorSpaces::ColorSpaces()
+{
+}
+
 ColorSpaces::ColorSpaces(ColorSpace in, ColorSpace out)
 {
 	PNM();

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Brightness.cpp" />
     <ClCompile Include="ColorSpaces.cpp" />
     <ClCompile Include="Filters.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Brightness.h" />
     <ClInclude Include="ColorSpaces.h" />
     <ClInclude Include="Filters.h" />
     <ClInclude Include="NormalV.h" />
