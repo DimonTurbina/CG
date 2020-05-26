@@ -4,6 +4,7 @@
 class Filter: public PNM  {
 public:
 	Filter();
+	Filter(int Bits);
 	int FloydSteinberg(const string& filename); //€ типа такой умный и возвращаю код ошибки
 	int JJN(const string& filename);
 	int Siera(const string& filename);
@@ -30,4 +31,7 @@ private:
 		{14.0 / 16.0, 1.0 / 16.0, 2.0 / 16.0, 7.0 / 16.0},
 		{9.0 / 16.0, 5.0 / 16.0, 10.0 / 16.0, 12.0 / 16.0},
 	};
+
+	int bits;
+	int countColorWithBits(int oldPixel);
 };

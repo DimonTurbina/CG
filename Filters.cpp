@@ -1,10 +1,25 @@
 #include "Filters.h"
 
-Filter::Filter()
+Filter::Filter(int bits)
 {
+	this->bits = bits;
 	PNM();
 }
 
+int Filter::countColorWithBits(int oldPixel) {
+	int PixelsBoarderValue = pow(2, bits);
+	vector<int> valuesArray(PixelsBoarderValue + 1);
+	//cout << valuesArray.size();
+	for (int i = 0; i < valuesArray.size(); i++)
+	{
+		//cout << oldPixel << endl;
+		valuesArray[i] = i * 256 / PixelsBoarderValue;
+		if (((abs(oldPixel + (256 / PixelsBoarderValue / 2)) >= valuesArray[i]) && (valuesArray[i] >= oldPixel))
+			|| ((abs(oldPixel - (256 / PixelsBoarderValue / 2)) <= valuesArray[i]) && (valuesArray[i] <= oldPixel)))
+			return valuesArray[i];
+	}
+	return 0;
+}
 int Filter::FloydSteinberg(const string& filename)
 {
 
@@ -29,7 +44,7 @@ int Filter::FloydSteinberg(const string& filename)
 			}*/
 
 			int oldpixel = gspixelsM[i][j];
-			int newpixel = oldpixel > 127 ? 255 : 0;
+			int newpixel = countColorWithBits(oldpixel);
 			gspixelsM[i][j] = newpixel;
 			int quant_error = oldpixel - newpixel;
 			if ((i + 1) != getHeight()) {
@@ -64,7 +79,7 @@ int Filter::JJN(const string& filename)
 		for (int j = 0; j < getWidth(); j++)
 		{
 			int oldpixel = gspixelsM[i][j];
-			int newpixel = oldpixel > 127 ? 255 : 0;
+			int newpixel = countColorWithBits(oldpixel);
 			gspixelsM[i][j] = newpixel;
 			int quant_error = oldpixel - newpixel;
 			if((i + 2) < getHeight())
@@ -118,7 +133,7 @@ int Filter::Siera(const string& filename)
 		for (int j = 0; j < getWidth(); j++)
 		{
 			int oldpixel = gspixelsM[i][j];
-			int newpixel = oldpixel > 127 ? 255 : 0;
+			int newpixel = countColorWithBits(oldpixel);
 			gspixelsM[i][j] = newpixel;
 			int quant_error = oldpixel - newpixel;
 			if((i + 2) < getHeight())
@@ -168,7 +183,7 @@ int Filter::Atkinson(const string& filename)
 		for (int j = 0; j < getWidth(); j++)
 		{
 			int oldpixel = gspixelsM[i][j];
-			int newpixel = oldpixel > 127 ? 255 : 0;
+			int newpixel = countColorWithBits(oldpixel);
 			gspixelsM[i][j] = newpixel;
 			int quant_error = oldpixel - newpixel;
 			if ((i + 2) < getHeight())
@@ -214,7 +229,7 @@ int Filter::Ordered8x8(const string& filename, int bits)
 		{
 			int oldpixel = gspixelsM[i][j];
 			int quant_error = oldpixel + mfactor * (orderedMatrix[i%8][j%8] - 1/2);
-			int newpixel = quant_error > 127 ? 255 : 0;
+			int newpixel = countColorWithBits(quant_error);
 			gspixelsM[i][j] = newpixel;
 		}
 	}
@@ -243,7 +258,7 @@ int Filter::HalfTone4x4(const string& filename, int bits)
 		{
 			int oldpixel = gspixelsM[i][j];
 			int quant_error = oldpixel + mfactor * (halftoneMatrix[i % 4][j % 4] - 1 / 2);
-			int newpixel = quant_error > 127 ? 255 : 0;
+			int newpixel = countColorWithBits(quant_error);
 			gspixelsM[i][j] = newpixel;
 		}
 	}

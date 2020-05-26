@@ -75,31 +75,31 @@ int main(int argc, char* argv[]) {
 		}
 			   break;
 		case(3): {
-			Filter Ftest;
+			Filter Ftest(atoi(argv[6]));
 			Ftest.open(argv[2]);
-			switch (atoi(argv[4]))
+			switch (atoi(argv[5]))
 			{
 			case(1):
-				Ftest.FloydSteinberg(argv[5]);
+				Ftest.FloydSteinberg(argv[3]);
 				break;
 			case(2):
-				Ftest.JJN(argv[5]);
+				Ftest.JJN(argv[3]);
 				break;
 			case(3):
-				Ftest.Siera(argv[5]);
+				Ftest.Siera(argv[3]);
 				break;
 			case(4):
-				Ftest.Atkinson(argv[5]);
+				Ftest.Atkinson(argv[3]);
 				break;
 			case(5):
-				if (atoi(argv[3]) == 1)
+				if (atoi(argv[4]) == 1)
 					Ftest.Gradient();
-				Ftest.Ordered8x8(argv[5], atoi(argv[6]));
+				Ftest.Ordered8x8(argv[3], atoi(argv[6]));
 				break;
 			case(6):
-				if (atoi(argv[3]) == 1)
+				if (atoi(argv[4]) == 1)
 					Ftest.Gradient();
-				Ftest.HalfTone4x4(argv[5], atoi(argv[6]));
+				Ftest.HalfTone4x4(argv[3], atoi(argv[6]));
 				break;
 			case(7):
 				Ftest.Random(argv[5]);
@@ -109,6 +109,7 @@ int main(int argc, char* argv[]) {
 				break;
 			}
 		}
+			break;
 		case(4): {
 			ColorSpace in;
 			ColorSpace out;
@@ -159,7 +160,7 @@ int main(int argc, char* argv[]) {
 
 
 		}
-
+			   break;
 		case(5): {
 			Brightness TestBrightness;
 			TestBrightness.open(argv[2]);
