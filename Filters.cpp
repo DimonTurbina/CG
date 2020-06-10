@@ -9,10 +9,8 @@ Filter::Filter(int bits)
 int Filter::countColorWithBits(int oldPixel) {
 	int PixelsBoarderValue = pow(2, bits);
 	vector<int> valuesArray(PixelsBoarderValue + 1);
-	//cout << valuesArray.size();
 	for (int i = 0; i < valuesArray.size(); i++)
 	{
-		//cout << oldPixel << endl;
 		valuesArray[i] = i * 256 / PixelsBoarderValue;
 		if (((abs(oldPixel + (256 / PixelsBoarderValue / 2)) >= valuesArray[i]) && (valuesArray[i] >= oldPixel))
 			|| ((abs(oldPixel - (256 / PixelsBoarderValue / 2)) <= valuesArray[i]) && (valuesArray[i] <= oldPixel)))
@@ -20,6 +18,7 @@ int Filter::countColorWithBits(int oldPixel) {
 	}
 	return 0;
 }
+
 int Filter::FloydSteinberg(const string& filename)
 {
 

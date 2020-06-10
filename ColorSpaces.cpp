@@ -854,7 +854,7 @@ void ColorSpaces::SaveMultipleFile(string f1, string f2, string f3)
 	filenameArrey[0] = f1;
 	filenameArrey[1] = f2;
 	filenameArrey[2] = f3;
-	for (int k = 0; k < 2; k++)
+	for (int k = 0; k < 3; k++)
 	{
 		if (k == 0) {
 			ofstream pnmPic(filenameArrey[k], ios::binary);
@@ -865,8 +865,6 @@ void ColorSpaces::SaveMultipleFile(string f1, string f2, string f3)
 				for (int j = 0; j < getWidth(); j++)
 				{
 					pnmPic.put(pixelsM[i][j].R);
-					pnmPic.put(pixelsM[i][j].G);
-					pnmPic.put(pixelsM[i][j].B);
 				}
 			}
 		}
